@@ -1,0 +1,786 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Cielito Dulce | Alfajores Artesanales</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&family=Playfair+Display:wght@700;800&display=swap" rel="stylesheet">
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      scroll-behavior: smooth;
+    }
+
+    :root {
+      --cream: #fff8f2;
+      --white: #ffffff;
+      --blush: #ffd8cf;
+      --rose: #d96f73;
+      --berry: #9f3148;
+      --cocoa: #4b2f25;
+      --caramel: #c8844f;
+      --mint: #d8efe4;
+      --ink: #2b1f1a;
+      --muted: #745f54;
+      --shadow: 0 20px 50px rgba(75, 47, 37, 0.14);
+    }
+
+    body {
+      font-family: "Poppins", sans-serif;
+      color: var(--ink);
+      background: var(--cream);
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+
+    img {
+      display: block;
+      max-width: 100%;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    .topbar {
+      position: fixed;
+      top: 0;
+      left: 0;
+      z-index: 20;
+      width: 100%;
+      padding: 16px 7%;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+      background: rgba(255, 248, 242, 0.92);
+      border-bottom: 1px solid rgba(75, 47, 37, 0.08);
+      backdrop-filter: blur(14px);
+    }
+
+    .brand {
+      font-family: "Playfair Display", serif;
+      font-size: clamp(1.5rem, 3vw, 2.1rem);
+      font-weight: 800;
+      color: var(--berry);
+      white-space: nowrap;
+    }
+
+    .brand span {
+      color: var(--cocoa);
+    }
+
+    .menu {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 26px;
+      list-style: none;
+      color: var(--cocoa);
+      font-weight: 700;
+      font-size: 0.96rem;
+    }
+
+    .menu a {
+      border-bottom: 2px solid transparent;
+      padding-bottom: 4px;
+      transition: 0.25s ease;
+    }
+
+    .menu a:hover {
+      color: var(--berry);
+      border-color: var(--berry);
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 48px;
+      padding: 13px 24px;
+      border: 0;
+      border-radius: 999px;
+      font: inherit;
+      font-weight: 800;
+      cursor: pointer;
+      transition: transform 0.22s ease, box-shadow 0.22s ease, background 0.22s ease;
+      text-align: center;
+    }
+
+    .btn:hover {
+      transform: translateY(-3px);
+    }
+
+    .btn-primary {
+      color: var(--white);
+      background: linear-gradient(135deg, var(--berry), var(--rose));
+      box-shadow: 0 14px 28px rgba(159, 49, 72, 0.25);
+    }
+
+    .btn-light {
+      color: var(--berry);
+      background: var(--white);
+      box-shadow: 0 12px 28px rgba(75, 47, 37, 0.1);
+    }
+
+    .btn-outline {
+      color: var(--cocoa);
+      background: transparent;
+      border: 2px solid rgba(75, 47, 37, 0.18);
+    }
+
+    section {
+      padding: 90px 7%;
+    }
+
+    .hero {
+      min-height: 100vh;
+      padding-top: 118px;
+      display: grid;
+      grid-template-columns: minmax(280px, 1fr) minmax(300px, 0.9fr);
+      align-items: center;
+      gap: 52px;
+      background:
+        linear-gradient(115deg, rgba(255, 248, 242, 0.96), rgba(255, 216, 207, 0.74));
+      background-size: cover;
+      background-position: center;
+    }
+
+    .hero-copy {
+      max-width: 680px;
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      margin-bottom: 18px;
+      padding: 8px 14px;
+      border-radius: 999px;
+      background: var(--mint);
+      color: #30624c;
+      font-weight: 800;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      font-size: 0.8rem;
+    }
+
+    h1,
+    h2 {
+      font-family: "Playfair Display", serif;
+      color: var(--cocoa);
+      line-height: 1.06;
+    }
+
+    h1 {
+      max-width: 760px;
+      margin-bottom: 22px;
+      font-size: clamp(3rem, 8vw, 6.4rem);
+    }
+
+    .hero-copy p {
+      max-width: 640px;
+      margin-bottom: 30px;
+      color: #5e493f;
+      font-size: clamp(1rem, 1.4vw, 1.2rem);
+      font-weight: 500;
+    }
+
+    .hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 14px;
+    }
+
+    .hero-card {
+      overflow: hidden;
+      border: 10px solid rgba(255, 255, 255, 0.78);
+      border-radius: 28px;
+      background: var(--white);
+      box-shadow: var(--shadow);
+    }
+
+    .hero-card img {
+      width: 100%;
+      height: 520px;
+      object-fit: cover;
+    }
+
+    .section-title {
+      max-width: 820px;
+      margin: 0 auto 46px;
+      text-align: center;
+    }
+
+    .section-title h2 {
+      margin-bottom: 14px;
+      font-size: clamp(2.1rem, 5vw, 3.6rem);
+    }
+
+    .section-title p {
+      color: var(--muted);
+      font-size: 1.05rem;
+      font-weight: 500;
+    }
+
+    .features {
+      background: var(--white);
+    }
+
+    .feature-grid,
+    .product-grid,
+    .testimonial-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 24px;
+    }
+
+    .feature-card,
+    .product-card,
+    .testimonial-card,
+    .contact-panel {
+      border: 1px solid rgba(75, 47, 37, 0.08);
+      border-radius: 22px;
+      background: var(--white);
+      box-shadow: var(--shadow);
+    }
+
+    .feature-card {
+      padding: 30px;
+    }
+
+    .feature-icon {
+      width: 54px;
+      height: 54px;
+      margin-bottom: 18px;
+      display: grid;
+      place-items: center;
+      border-radius: 17px;
+      background: var(--blush);
+      color: var(--berry);
+      font-size: 1.6rem;
+      font-weight: 800;
+    }
+
+    .feature-card h3,
+    .product-card h3,
+    .testimonial-card h3 {
+      margin-bottom: 10px;
+      color: var(--cocoa);
+      font-size: 1.25rem;
+    }
+
+    .feature-card p,
+    .product-card p,
+    .testimonial-card p {
+      color: var(--muted);
+      font-weight: 500;
+    }
+
+    .products {
+      background: linear-gradient(180deg, var(--cream), #ffece7);
+    }
+
+    .product-card {
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .product-card img {
+      width: 100%;
+      height: 245px;
+      object-fit: cover;
+    }
+
+    .product-body {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      padding: 24px;
+    }
+
+    .product-footer {
+      margin-top: auto;
+      padding-top: 20px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+    }
+
+    .price {
+      color: var(--berry);
+      font-size: 1.35rem;
+      font-weight: 900;
+      white-space: nowrap;
+    }
+
+    .about {
+      display: grid;
+      grid-template-columns: minmax(280px, 0.95fr) minmax(300px, 1.05fr);
+      align-items: center;
+      gap: 42px;
+      background: var(--white);
+    }
+
+    .about img {
+      width: 100%;
+      min-height: 430px;
+      border-radius: 26px;
+      object-fit: cover;
+      box-shadow: var(--shadow);
+    }
+
+    .about h2 {
+      margin-bottom: 20px;
+      font-size: clamp(2.2rem, 4vw, 3.8rem);
+    }
+
+    .about p {
+      margin-bottom: 16px;
+      color: var(--muted);
+      font-weight: 500;
+    }
+
+    .stats {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 14px;
+      margin-top: 24px;
+    }
+
+    .stat {
+      padding: 18px;
+      border-radius: 18px;
+      background: var(--cream);
+      text-align: center;
+    }
+
+    .stat strong {
+      display: block;
+      color: var(--berry);
+      font-size: 1.65rem;
+      line-height: 1.1;
+    }
+
+    .stat span {
+      color: var(--muted);
+      font-size: 0.9rem;
+      font-weight: 700;
+    }
+
+    .testimonials {
+      background: #fff1ed;
+    }
+
+    .testimonial-card {
+      padding: 26px;
+    }
+
+    .stars {
+      margin-bottom: 12px;
+      color: var(--caramel);
+      font-size: 1.25rem;
+      letter-spacing: 0.08em;
+    }
+
+    .contact {
+      background:
+        linear-gradient(135deg, rgba(75, 47, 37, 0.94), rgba(159, 49, 72, 0.9));
+      background-position: center;
+      background-size: cover;
+      color: var(--white);
+    }
+
+    .contact-wrap {
+      display: grid;
+      grid-template-columns: minmax(280px, 1fr) minmax(280px, 0.8fr);
+      align-items: center;
+      gap: 36px;
+    }
+
+    .contact h2 {
+      margin-bottom: 16px;
+      color: var(--white);
+      font-size: clamp(2.4rem, 5vw, 4rem);
+    }
+
+    .contact p {
+      max-width: 720px;
+      margin-bottom: 24px;
+      color: rgba(255, 255, 255, 0.86);
+      font-size: 1.08rem;
+      font-weight: 500;
+    }
+
+    .contact-panel {
+      padding: 28px;
+      background: rgba(255, 255, 255, 0.94);
+      color: var(--cocoa);
+    }
+
+    .contact-visual {
+      overflow: hidden;
+      margin-bottom: 18px;
+      border-radius: 18px;
+      box-shadow: 0 12px 28px rgba(75, 47, 37, 0.14);
+    }
+
+    .contact-visual img {
+      width: 100%;
+      height: 210px;
+      object-fit: cover;
+      background: var(--cream);
+    }
+
+    .contact-panel h3 {
+      margin-bottom: 16px;
+      font-size: 1.35rem;
+    }
+
+    .contact-list {
+      display: grid;
+      gap: 13px;
+      margin-bottom: 22px;
+      list-style: none;
+      color: var(--muted);
+      font-weight: 700;
+    }
+
+    .contact-list strong {
+      color: var(--cocoa);
+    }
+
+    footer {
+      padding: 34px 7%;
+      background: #2f201b;
+      color: rgba(255, 255, 255, 0.78);
+      text-align: center;
+      font-weight: 600;
+    }
+
+    .reveal {
+      opacity: 0;
+      transform: translateY(28px);
+      transition: 0.7s ease;
+    }
+
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    @media (max-width: 980px) {
+      .menu {
+        display: none;
+      }
+
+      .hero,
+      .about,
+      .contact-wrap {
+        grid-template-columns: 1fr;
+      }
+
+      .hero-card img {
+        height: 380px;
+      }
+
+      .feature-grid,
+      .product-grid,
+      .testimonial-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+    }
+
+    @media (max-width: 640px) {
+      .topbar {
+        padding: 12px 5%;
+      }
+
+      .topbar .btn {
+        display: none;
+      }
+
+      section {
+        padding: 72px 5%;
+      }
+
+      .hero {
+        padding-top: 98px;
+      }
+
+      .hero-card img {
+        height: 310px;
+      }
+
+      .feature-grid,
+      .product-grid,
+      .testimonial-grid,
+      .stats {
+        grid-template-columns: 1fr;
+      }
+
+      .product-footer {
+        align-items: stretch;
+        flex-direction: column;
+      }
+
+      .product-footer .btn {
+        width: 100%;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header class="topbar">
+    <a class="brand" href="#inicio">Cielito <span>Dulce</span></a>
+    <ul class="menu">
+      <li><a href="#inicio">Inicio</a></li>
+      <li><a href="#productos">Productos</a></li>
+      <li><a href="#nosotros">Nosotros</a></li>
+      <li><a href="#clientes">Clientes</a></li>
+      <li><a href="#contacto">Contacto</a></li>
+    </ul>
+    <a class="btn btn-primary" href="https://wa.me/56981073297?text=Hola%20Cielito%20Dulce%2C%20quiero%20hacer%20un%20pedido" target="_blank" rel="noopener">Comprar ahora</a>
+  </header>
+
+  <main>
+    <section class="hero" id="inicio">
+      <div class="hero-copy reveal">
+        <span class="eyebrow">Alfajores artesanales premium</span>
+        <h1>El sabor más dulce de tus momentos.</h1>
+        <p>
+          Alfajores hechos con manjar cremoso, coberturas deliciosas y sabores especiales para regalar, celebrar o darte un gusto.
+        </p>
+        <div class="hero-actions">
+          <a class="btn btn-primary" href="#productos">Ver productos</a>
+          <a class="btn btn-light" href="https://wa.me/56981073297?text=Hola%20Cielito%20Dulce%2C%20quiero%20comprar%20alfajores" target="_blank" rel="noopener">Comprar por WhatsApp</a>
+        </div>
+      </div>
+      <div class="hero-card reveal">
+        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSFcqd0olNyhZjzOEnc3mgo9hP8ztlHmKDSv12O8MrsYA&s=10" alt="Adolescente rubia mostrando una bandeja con alfajores artesanales">
+      </div>
+    </section>
+
+    <section class="features">
+      <div class="section-title reveal">
+        <h2>Detalles que se notan</h2>
+        <p>Una presentación bonita, sabores claros y una experiencia dulce desde el primer vistazo.</p>
+      </div>
+      <div class="feature-grid">
+        <article class="feature-card reveal">
+          <div class="feature-icon">1</div>
+          <h3>Ingredientes ricos</h3>
+          <p>Usamos manjar suave, chocolate, frutas y rellenos cremosos para lograr sabores intensos.</p>
+        </article>
+        <article class="feature-card reveal">
+          <div class="feature-icon">2</div>
+          <h3>Hechos a mano</h3>
+          <p>Cada alfajor se prepara con cuidado para que llegue fresco, bonito y delicioso.</p>
+        </article>
+        <article class="feature-card reveal">
+          <div class="feature-icon">3</div>
+          <h3>Perfectos para regalar</h3>
+          <p>Ideales para cumpleaños, fechas especiales, detalles pequeños o pedidos personalizados.</p>
+        </article>
+      </div>
+    </section>
+
+    <section class="products" id="productos">
+      <div class="section-title reveal">
+        <h2>Nuestros alfajores</h2>
+        <p>Elige tu sabor favorito y compra directo por WhatsApp con un mensaje listo.</p>
+      </div>
+      <div class="product-grid">
+        <article class="product-card reveal">
+          <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR3v5Ycz9wDElzcWBOqYkatocrzfz4h7BOqcQ&s" alt="Alfajor Oreo y Manjar">
+          <div class="product-body">
+            <h3>Oreo & Manjar</h3>
+            <p>Manjar cremoso con trozos de Oreo y cobertura de chocolate.</p>
+            <div class="product-footer">
+              <span class="price">$1.200</span>
+              <a class="btn btn-primary" href="https://wa.me/56981073297?text=Hola%20Cielito%20Dulce%2C%20quiero%20comprar%20el%20alfajor%20Oreo%20y%20Manjar" target="_blank" rel="noopener">Comprar</a>
+            </div>
+          </div>
+        </article>
+        <article class="product-card reveal">
+          <img src="https://tn.com.ar/resizer/v2/havanna-lanzo-su-alfajor-dubai-y-fue-furor-en-los-locales-de-todo-el-pais-foto-havanna-6R65QIDDBNGIPKA5IUF7FD727Y.jpg?auth=f3aa7a548b96f4a15522e7e3ecbfbcbd1f7b1b4ce0818eb969d9f292ac022999&width=900" alt="Alfajor Pistacho y Manjar">
+          <div class="product-body">
+            <h3>Pistacho & Manjar</h3>
+            <p>Una mezcla elegante de pistacho suave con manjar artesanal.</p>
+            <div class="product-footer">
+              <span class="price">$1.200</span>
+              <a class="btn btn-primary" href="https://wa.me/56981073297?text=Hola%20Cielito%20Dulce%2C%20quiero%20comprar%20el%20alfajor%20Pistacho%20y%20Manjar" target="_blank" rel="noopener">Comprar</a>
+            </div>
+          </div>
+        </article>
+        <article class="product-card reveal">
+          <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRzOQ9jBSHLOaq85bQn31WCOP-M6iUPaWWDVA&s" alt="Alfajor Frambuesa y Manjar">
+          <div class="product-body">
+            <h3>Frambuesa & Manjar</h3>
+            <p>Frambuesa dulce y fresca mezclada con manjar premium.</p>
+            <div class="product-footer">
+              <span class="price">$1.000</span>
+              <a class="btn btn-primary" href="https://wa.me/56981073297?text=Hola%20Cielito%20Dulce%2C%20quiero%20comprar%20el%20alfajor%20Frambuesa%20y%20Manjar" target="_blank" rel="noopener">Comprar</a>
+            </div>
+          </div>
+        </article>
+        <article class="product-card reveal">
+          <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSXpk60LOdY8mmL82Sg4JfymtVnpocw0UzckQ&s" alt="Alfajor Nutella y Manjar">
+          <div class="product-body">
+            <h3>Nutella & Manjar</h3>
+            <p>Nutella cremosa, manjar artesanal y galleta suave bañada en chocolate.</p>
+            <div class="product-footer">
+              <span class="price">$1.000</span>
+              <a class="btn btn-primary" href="https://wa.me/56981073297?text=Hola%20Cielito%20Dulce%2C%20quiero%20comprar%20el%20alfajor%20Nutella%20y%20Manjar" target="_blank" rel="noopener">Comprar</a>
+            </div>
+          </div>
+        </article>
+        <article class="product-card reveal">
+          <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSGe_3VASMH3Ufb8UBPTTY6LNq0M4wRwiBfUQ&s" alt="Alfajor clásico de manjar">
+          <div class="product-body">
+            <h3>Clásico de Manjar</h3>
+            <p>El clásico alfajor artesanal con abundante manjar y cobertura premium.</p>
+            <div class="product-footer">
+              <span class="price">$1.000</span>
+              <a class="btn btn-primary" href="https://wa.me/56981073297?text=Hola%20Cielito%20Dulce%2C%20quiero%20comprar%20el%20alfajor%20Clasico%20de%20Manjar" target="_blank" rel="noopener">Comprar</a>
+            </div>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <section class="about" id="nosotros">
+      <img class="reveal" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTnpJ3uEIYit8dEVf1_c9FG60W0hsXCd6CTYt5__RPJHbeA-qXj2xuMD5w&s=10" alt="Caja elegante con alfajores artesanales de Cielito Dulce">
+      <div class="reveal">
+        <h2>Quiénes somos</h2>
+        <p>
+          Cielito Dulce nació para transformar los alfajores clásicos en una experiencia más bonita, delicada y especial.
+        </p>
+        <p>
+          Preparamos cada pedido con dedicación, cuidando el sabor, la presentación y los detalles para que cada cliente reciba algo hecho con cariño.
+        </p>
+        <p>
+          Nuestra misión es entregar alfajores artesanales premium con sabores únicos y una atención cercana.
+        </p>
+        <div class="stats">
+          <div class="stat">
+            <span>Clientes felices</span>
+          </div>
+          <div class="stat">
+            <strong>+40</strong>
+            <span>Sabores creados</span>
+          </div>
+          <div class="stat">
+            <strong>98%</strong>
+            <span>Recomienda</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="testimonials" id="clientes">
+      <div class="section-title reveal">
+        <h2>Clientes felices</h2>
+        <p>Opiniones simples, claras y visibles para que tu página se vea más confiable.</p>
+      </div>
+      <div class="testimonial-grid">
+        <article class="testimonial-card reveal">
+          <div class="stars">★★★★★</div>
+          <h3>Muy ricos</h3>
+          <p>El manjar es suave y la presentación se ve preciosa para regalar.</p>
+        </article>
+        <article class="testimonial-card reveal">
+          <div class="stars">★★★★★</div>
+          <h3>Excelente atención</h3>
+          <p>Respondieron rápido por WhatsApp y el pedido llegó perfecto.</p>
+        </article>
+        <article class="testimonial-card reveal">
+          <div class="stars">★★★★★</div>
+          <h3>Mis favoritos</h3>
+          <p>El de Oreo y el clásico de manjar quedaron increíbles.</p>
+        </article>
+      </div>
+    </section>
+
+    <section class="contact" id="contacto">
+      <div class="contact-wrap">
+        <div class="reveal">
+          <h2>Haz tu pedido hoy</h2>
+          <p>
+            Presiona el botón y se abrirá WhatsApp con un mensaje listo para comprar. También puedes revisar el teléfono y los datos de contacto aquí.
+          </p>
+          <a class="btn btn-light" href="https://wa.me/56981073297?text=Hola%20Cielito%20Dulce%2C%20quiero%20hacer%20un%20pedido" target="_blank" rel="noopener">Ir a WhatsApp</a>
+        </div>
+        <aside class="contact-panel reveal">
+          <div class="contact-visual">
+            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR7lUIwjHNzQ-6oX8Om3sGMlAnslnvZ5-z8s-P-s87I4lZ3cFHAX3_Hhum5&s=10" alt="Alfajores artesanales junto a una bandera chilena">
+          </div>
+         
+       <h3>Contacto</h3>
+
+<ul class="contact-list">
+    <li>
+        <strong>WhatsApp:</strong>
+        <a href="https://wa.me/56981073297" target="_blank">
+            +56 9 8107 3297
+        </a>
+    </li>
+
+    <li>
+        <strong>Email:</strong>
+        <a href="mailto:martina.romero809@gmail.com">
+            martina.romero809@gmail.com
+        </a>
+    </li>
+
+    <li>
+        <strong>Ubicación:</strong>
+        <a href="https://maps.google.com/?q=Eusebio+Lillo+1574,+Rancagua"
+           target="_blank">
+            Eusebio Lillo 1574, Rancagua
+        </a>
+    </li>
+
+   
+
+
+   
+</a>
+          <a class="btn btn-primary" href="https://wa.me/56981073297?text=Hola%20Cielito%20Dulce%2C%20necesito%20informacion%20para%20comprar" target="_blank" rel="noopener">Escribir ahora</a>
+        </aside>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    Diseñado por Martina Romero. © 2026 Cielito Dulce. Todos los derechos reservados.
+  </footer>
+
+  <script>
+    const revealElements = document.querySelectorAll(".reveal");
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add("visible");
+        }
+      });
+    }, { threshold: 0.16 });
+
+    revealElements.forEach((element) => observer.observe(element));
+
+    document.querySelectorAll(".btn-primary, .btn-light, .btn-outline").forEach((button) => {
+      button.addEventListener("click", () => {
+        button.style.transform = "scale(0.97)";
+        setTimeout(() => {
+          button.style.transform = "";
+        }, 140);
+      });
+    });
+  </script>
+</body>
+</html>
